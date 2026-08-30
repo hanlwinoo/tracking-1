@@ -1,12 +1,13 @@
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCR6pogNfCUJSradGjPYIRc1_LJuDc2GoM",
-    authDomain: "logstic-system-5fcac.firebaseapp.com",
-    databaseURL: "https://logstic-system-5fcac-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "logstic-system-5fcac",
-    storageBucket: "logstic-system-5fcac.firebasestorage.app",
-    messagingSenderId: "1048996922654",
-    appId: "1:1048996922654:web:9a2cc5abf5bfc43e68b50f"
+  apiKey: "AIzaSyAdHq_2wosa2wL_1OLMXWn16g9h_eqOe3U",
+  authDomain: "long-shipping-3ecee.firebaseapp.com",
+  databaseURL: "https://long-shipping-3ecee-default-rtdb.firebaseio.com",
+  projectId: "long-shipping-3ecee",
+  storageBucket: "long-shipping-3ecee.firebasestorage.app",
+  messagingSenderId: "980923923170",
+  appId: "1:980923923170:web:0b5164fce3d07f928ffcbb",
+  measurementId: "G-KLGYK2QEM9"
 };
 
 // Initialize Firebase
