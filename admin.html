@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF Shipping - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <div class="admin-wrapper">
+        <header class="admin-top-header">
+            <div class="logo-container">
+                <div class="single-line-logo-admin" onclick="window.location.href='index.html'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Logo_of_SF_Express.svg/1280px-Logo_of_SF_Express.svg.png" 
+                         alt="SF Shipping Logo" class="sf-logo">
+                    <span class="sf-logo-text">SF Shipping</span>
+                </div>
+                <div>
+                    <h1 data-i18n="adminTitle">SF Shipping Admin</h1>
+                    <p class="tagline" data-i18n="adminTagline">Management Portal - Real-time Shipment Tracking</p>
+                </div>
+            </div>
+            
+            <div class="admin-header-controls">
+                <div class="lang-selector-container">
+                    <i class="fas fa-globe lang-icon"></i>
+                    <select id="langSelect" class="lang-select">
+                        <option value="en">English (US)</option>
+                        <option value="zh">中文 (Chinese)</option>
+                    </select>
+                </div>
+                <button id="logoutBtn" class="btn btn-danger btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> <span data-i18n="logout">Logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="admin-container">
+            <div class="admin-tabs-nav">
+                <button class="tab-btn active" id="addShippingTab">
+                    <i class="fas fa-plus-circle"></i> <span data-i18n="createShipment">Create Shipment</span>
+                </button>
+                <button class="tab-btn" id="manageShippingTab">
+                    <i class="fas fa-boxes"></i> <span data-i18n="shipmentDirectory">Shipment Directory</span>
+                </button>
+            </div>
+
+            <!-- Page 1: Create Shipment Page -->
+            <div class="tab-content active" id="addShippingContent">
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-box-open"></i> <span data-i18n="createNewShipment">Create New Shipment</span></h3>
+                        <span class="card-subtitle" data-i18n="fillDetails">Fill in receiver, sender, and route details</span>
+                    </div>
+                    <form id="shippingForm" class="shipping-form">
+                        <div class="form-section">
+                            <h4 class="section-title"><i class="fas fa-user-circle"></i> <span data-i18n="senderInfo">Sender Information</span></h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="senderName"><span data-i18n="senderName">Sender Full Name</span> *</label>
+                                    <input type="text" id="senderName" required placeholder="e.g. John Doe">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4 class="section-title"><i class="fas fa-user-check"></i> <span data-i18n="receiverInfo">Receiver Information</span></h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="receiverName"><span data-i18n="fullName">Full Name</span> *</label>
+                                    <input type="text" id="receiverName" required placeholder="e.g. Jane Smith">
+                                </div>
+                                <div class="form-group">
+                                    <label for="receiverPhone"><span data-i18n="phone">Phone Number</span> *</label>
+                                    <input type="tel" id="receiverPhone" required placeholder="e.g. +1 234 567 890">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="receiverAddress"><span data-i18n="address">Delivery Address</span> *</label>
+                                    <textarea id="receiverAddress" required rows="3" placeholder="Enter full address and postal code"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4 class="section-title"><i class="fas fa-globe"></i> <span data-i18n="routeDetails">Route Details</span></h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="origin"><span data-i18n="origin">Shipping Origin</span> *</label>
+                                    <select id="origin" required>
+                                        <option value="" data-i18n="selectOrigin">Select origin country</option>
+                                        <option value="Malaysia" data-country="Malaysia">Malaysia</option>
+                                        <option value="Singapore" data-country="Singapore">Singapore</option>
+                                        <option value="US" data-country="US">US</option>
+                                        <option value="UK" data-country="UK">UK</option>
+                                        <option value="Dubai" data-country="Dubai">Dubai</option>
+                                        <option value="Oman" data-country="Oman">Oman</option>
+                                        <option value="Myanmar" data-country="Myanmar">Myanmar</option>
+                                        <option value="Philiphine" data-country="Philiphine">Philiphine</option>
+                                        <option value="China" data-country="China">China</option>
+                                        <option value="Thiland" data-country="Thiland">Thiland</option>
+                                        <option value="Swetzarland" data-country="Swetzarland">Swetzarland</option>
+                                        <option value="Australia" data-country="Australia">Australia</option>
+                                        <option value="newzeland" data-country="newzeland">newzeland</option>
+                                        <option value="Thiwan" data-country="Thiwan">Thiwan</option>
+                                        <option value="Hongkong" data-country="Hongkong">Hongkong</option>
+                                        <option value="vietnam" data-country="vietnam">vietnam</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="destination"><span data-i18n="destination">Shipping Destination</span> *</label>
+                                    <select id="destination" required>
+                                        <option value="" data-i18n="selectDestination">Select destination country</option>
+                                        <option value="Malaysia" data-country="Malaysia">Malaysia</option>
+                                        <option value="Singapore" data-country="Singapore">Singapore</option>
+                                        <option value="US" data-country="US">US</option>
+                                        <option value="UK" data-country="UK">UK</option>
+                                        <option value="Dubai" data-country="Dubai">Dubai</option>
+                                        <option value="Oman" data-country="Oman">Oman</option>
+                                        <option value="Myanmar" data-country="Myanmar">Myanmar</option>
+                                        <option value="Philiphine" data-country="Philiphine">Philiphine</option>
+                                        <option value="China" data-country="China">China</option>
+                                        <option value="Thiland" data-country="Thiland">Thiland</option>
+                                        <option value="Swetzarland" data-country="Swetzarland">Swetzarland</option>
+                                        <option value="Australia" data-country="Australia">Australia</option>
+                                        <option value="newzeland" data-country="newzeland">newzeland</option>
+                                        <option value="Thiwan" data-country="Thiwan">Thiwan</option>
+                                        <option value="Hongkong" data-country="Hongkong">Hongkong</option>
+                                        <option value="vietnam" data-country="vietnam">vietnam</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> <span data-i18n="btnGenerate">Generate & Register Shipment</span>
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i> <span data-i18n="btnReset">Reset Form</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Page 2: Shipment Directory Page -->
+            <div class="tab-content" id="manageShippingContent">
+                <div class="admin-card card-large">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list-check"></i> <span data-i18n="registeredShipments">Registered Shipments</span></h3>
+                        <span class="card-subtitle" data-i18n="manageSubtitle">Manage tracking histories and export QR codes</span>
+                    </div>
+                    
+                    <div class="directory-table-container">
+                        <table class="shipment-directory-table">
+                            <thead>
+                                <tr>
+                                    <th>TRACKING DETAILS</th>
+                                    <th>SENDER</th>
+                                    <th>RECEIVER</th>
+                                    <th>PHONE</th>
+                                    <th>ORIGIN</th>
+                                    <th>DESTINATION</th>
+                                    <th>STATUS</th>
+                                    <th>CREATED DATE</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipmentTableBody">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Update Shipment Progress Modal -->
+    <div id="updateStatusModal" class="modal">
+        <div class="modal-content admin-modal modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-truck-ramp-box"></i> <span data-i18n="modalUpdateTitle">Update Shipment Progress</span></h2>
+                <span class="close" onclick="closeUpdateModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="updateStatusForm" class="large-modal-form">
+                    <input type="hidden" id="modalTrackingNumber">
+                    
+                    <div class="form-group-large">
+                        <label for="stepSelect">
+                            <i class="fas fa-list-ol"></i> <span data-i18n="lblSelectStep">Select Progress Milestone</span> *
+                        </label>
+                        <select id="stepSelect" class="form-control-xl" required>
+                        </select>
+                    </div>
+
+                    <div class="form-group-large">
+                        <label for="stepLocationSelect">
+                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="lblCurrentLocation">Select Current Hub Location</span> *
+                        </label>
+                        <select id="stepLocationSelect" class="form-control-xl" required>
+                        </select>
+                    </div>
+
+                    <div class="modal-actions-large">
+                        <button type="submit" class="btn btn-primary btn-xl">
+                            <i class="fas fa-check-circle"></i> <span data-i18n="btnSaveUpdate">Save Progress Event</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-xl" onclick="closeUpdateModal()">
+                            <i class="fas fa-times-circle"></i> <span data-i18n="btnClose">Close</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export QR Code Modal -->
+    <div id="qrCodeModal" class="modal">
+        <div class="modal-content admin-modal qr-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-qrcode"></i> <span data-i18n="qrModalTitle">Shipment QR Pass</span></h2>
+                <span class="close" onclick="closeQRModal()">&times;</span>
+            </div>
+            <div class="modal-body qr-modal-body">
+                <div class="qr-info-card">
+                    <div class="qr-info-row">
+                        <span class="qr-info-label" data-i18n="qrTracking"><i class="fas fa-hashtag"></i> Tracking No.</span>
+                        <span class="qr-info-val highlight-blue" id="qrTrackingNumber"></span>
+                    </div>
+                    <div class="qr-info-row">
+                        <span class="qr-info-label" data-i18n="qrCode"><i class="fas fa-key"></i> Confirm Code</span>
+                        <span class="qr-info-val highlight-blue" id="qrConfirmationCode"></span>
+                    </div>
+                    <div class="qr-info-row">
+                        <span class="qr-info-label" data-i18n="qrReceiver"><i class="fas fa-user-check"></i> Receiver</span>
+                        <span class="qr-info-val" id="qrReceiverName"></span>
+                    </div>
+                </div>
+                
+                <div class="qr-display-box">
+                    <div id="qrcode"></div>
+                    <p class="qr-instruction-text" data-i18n="qrInstruction">
+                        <i class="fas fa-camera"></i> Scan with any camera to quickly access real-time tracking.
+                    </p>
+                </div>
+                
+                <div class="qr-actions-row">
+                    <button class="btn btn-primary btn-xl full-width" onclick="downloadQRCode()">
+                        <i class="fas fa-download"></i> <span data-i18n="btnSaveQR">Download QR Image</span>
+                    </button>
+                    <button class="btn btn-secondary btn-xl full-width" onclick="closeQRModal()">
+                        <i class="fas fa-times"></i> <span data-i18n="btnClose">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

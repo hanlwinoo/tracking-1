@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF Shipping - Track Your Shipment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="tracking-page">
+    <div class="tracking-banner">
+        <div class="single-line-brand">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Logo_of_SF_Express.svg/1280px-Logo_of_SF_Express.svg.png" alt="" class="">
+            <h1 class="brand-title">SF Shipping</h1>
+        </div>
+        <p class="tagline" data-i18n="tagline">Reliable Global Logistics Solutions</p>
+    </div>
+
+    <div class="main-wrapper">
+        <main class="tracking-card">
+            <div class="card-header-title">
+                <h2><i class="fas fa-search-location"></i> <span data-i18n="trackYourShipment">Track Your Shipment</span></h2>
+            </div>
+            
+            <div class="card-body">
+                <form id="trackingForm" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="trackingNumber"><i class="fas fa-barcode"></i> <span data-i18n="trackingNumber">Tracking Number</span></label>
+                        <input type="text" id="trackingNumber" class="glass-input" placeholder="Enter SF tracking number (e.g., SF1234567890123)" required>
+                        <span class="input-help" data-i18n="trackingHelp">Format: SF followed by 13 digits</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="confirmationCode"><i class="fas fa-shield-alt"></i> <span data-i18n="confirmationCode">Confirmation Code</span></label>
+                        <input type="text" id="confirmationCode" class="glass-input" placeholder="Enter 4-digit confirmation code" required>
+                        <span class="input-help" data-i18n="confirmationHelp">4 random letters/numbers provided when shipment was created</span>
+                    </div>
+
+                    <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+                    <button type="button" id="trackButton" class="track-btn">
+                        <i class="fas fa-search"></i> <span data-i18n="trackButton">Track Shipment</span>
+                    </button>
+                </form>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <div class="result-header-row">
+                        <div class="tracking-number-wrap">
+                            <i class="fas fa-hashtag icon-blue"></i>
+                            <span class="header-label" data-i18n="lblTrackingNo">Tracking Number:</span>
+                            <span id="displayTrackingNumber" class="tracking-no-val"></span>
+                        </div>
+                        <div class="status-wrap">
+                            <span class="header-label" data-i18n="shipmentStatus">Status:</span>
+                            <span id="displayStatus" class="status-badge">In Transit</span>
+                        </div>
+                    </div>
+
+                    <div class="details-form-container">
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-shield-alt"></i> <span data-i18n="lblConfirmCode">Confirmation Code</span></span>
+                            <span id="displayConfirmationCode" class="detail-value highlight-text"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-paper-plane"></i> <span data-i18n="lblOrigin">Origin</span></span>
+                            <span id="displayOrigin" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-location-dot"></i> <span data-i18n="lblDestination">Destination</span></span>
+                            <span id="displayDestination" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-user"></i> <span data-i18n="lblSender">Sender</span></span>
+                            <span id="displaySenderName" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-user-check"></i> <span data-i18n="lblReceiver">Receiver</span></span>
+                            <span id="displayReceiverName" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-phone-alt"></i> <span data-i18n="lblPhone">Receiver Phone</span></span>
+                            <span id="displayReceiverPhone" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item full-width-line">
+                            <span class="detail-label"><i class="fas fa-map-marked-alt"></i> <span data-i18n="lblAddress">Delivery Address</span></span>
+                            <span id="displayReceiverAddress" class="detail-value"></span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-header">
+                            <i class="fas fa-clock-rotate-left"></i>
+                            <h4 data-i18n="historyProgress">Tracking History Progress</h4>
+                        </div>
+                        <div id="trackingTimeline" class="timeline"></div>
+                    </div>
+
+                    <button type="button" id="newSearchButton" class="btn btn-secondary full-width btn-search-again">
+                        <i class="fas fa-arrow-left"></i> <span data-i18n="searchAnother">Search Another Shipment</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p>© 2026 SF Shipping. All rights reserved.</p>
+        <p data-i18n="footerText">For shipment booking, please contact our customer service.</p>
+    </footer>
+
+    <div id="adminPasswordModal" class="modal">
+        <div class="modal-content admin-modal password-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-lock"></i> <span data-i18n="adminAuth">Admin Authentication</span></h2>
+                <span class="close" onclick="closePasswordModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="adminPasswordForm" onsubmit="return false;">
+                    <div class="form-group-large">
+                        <label for="adminPasswordInput">
+                            <i class="fas fa-key"></i> <span data-i18n="enterPass">Enter Administrator Password</span>
+                        </label>
+                        <input type="password" id="adminPasswordInput" class="form-control-xl" placeholder="Password required" required>
+                        <div id="passErrorMessage" class="error-message" style="display:none; margin-top:10px;"></div>
+                    </div>
+                    <div class="modal-actions-large">
+                        <button type="button" id="submitPassBtn" class="btn btn-primary btn-xl full-width">
+                            <i class="fas fa-sign-in-alt"></i> <span data-i18n="loginPortal">Login to Portal</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
